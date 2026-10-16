@@ -1,0 +1,83 @@
+{
+  "project_name": "RetailPOS_VB6",
+  "test_cases": [
+    {
+      "name": "Tier 1, Experienced Customer",
+      "description": "Standard Tier 1 discount with loyalty bonus.",
+      "input": {
+        "sales_data.csv": [
+          "1001,150.50,1,8"
+        ],
+        "global_user_id": null
+      },
+      "expected_output": {
+        "frmCheckout.frm": "Sale Processed Successfully! Final Total: $118.07"
+      }
+    },
+    {
+      "name": "Tier 2, New Customer",
+      "description": "Standard Tier 2 discount, minimal loyalty bonus.",
+      "input": {
+        "sales_data.csv": [
+          "1005,300.75,2,15"
+        ],
+        "global_user_id": null
+      },
+      "expected_output": {
+        "frmCheckout.frm": "Sale Processed Successfully! Final Total: $282.73"
+      }
+    },
+    {
+      "name": "Tier 1, Very New Customer",
+      "description": "Tier 1 discount, large loyalty bonus due to short tenure.",
+      "input": {
+        "sales_data.csv": [
+          "1003,220.00,1,1"
+        ],
+        "global_user_id": null
+      },
+      "expected_output": {
+        "frmCheckout.frm": "Sale Processed Successfully! Final Total: $187.00"
+      }
+    },
+    {
+      "name": "Higher Tier, No Loyalty",
+      "description": "No base discount, no loyalty bonus.",
+      "input": {
+        "sales_data.csv": [
+          "1004,50.00,3,0"
+        ],
+        "global_user_id": null
+      },
+      "expected_output": {
+        "frmCheckout.frm": "Sale Processed Successfully! Final Total: $50.00"
+      }
+    },
+    {
+      "name": "Nepotism Discount",
+      "description": "The special user 'JTIMMINS' receives a 100% discount.",
+      "input": {
+        "sales_data.csv": [
+          "1002,75.20,2,3"
+        ],
+        "global_user_id": "JTIMMINS"
+      },
+      "expected_output": {
+        "frmCheckout.frm": "Sale Processed Successfully! Final Total: $0.00"
+      }
+    },
+     {
+      "name": "Zero Years Calculation Test",
+      "description": "Tests the case where Years = 0, ensuring no division by zero.",
+      "input": {
+        "sales_data.csv": [
+          "1006,100.00,1,0"
+        ],
+        "global_user_id": null
+      },
+      "expected_output": {
+        "frmCheckout.frm": "Sale Processed Successfully! Final Total: $85.00"
+      }
+    }
+  ]
+}

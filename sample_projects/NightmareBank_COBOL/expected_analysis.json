@@ -1,0 +1,54 @@
+{
+  "project_name": "NightmareBank_COBOL",
+  "analysis_date": "2023-10-27",
+  "issues": [
+    {
+      "type": "Code Smell",
+      "description": "Excessive use of GO TO statements creates spaghetti code.",
+      "severity": "Major",
+      "file": "OVD-DRIVER.cbl",
+      "line": "47"
+    },
+    {
+      "type": "Technical Debt",
+      "description": "Hardcoded fee amounts (magic numbers) make maintenance difficult.",
+      "severity": "Major",
+      "file": "FEE-CALC.cbl",
+      "line": "12"
+    },
+    {
+      "type": "Bug",
+      "description": "Fee calculation does not check if applying the fee pushes the balance further negative than intended or exceeds an overdraft limit (limit is ignored).",
+      "severity": "Critical",
+      "file": "FEE-CALC.cbl",
+      "line": "27"
+    },
+    {
+      "type": "Code Smell",
+      "description": "Unexplained and undocumented business rule for Y2K flag surcharge.",
+      "severity": "Minor",
+      "file": "FEE-CALC.cbl",
+      "line": "32"
+    },
+    {
+      "type": "Bug",
+      "description": "OVD-LIMIT field is present but its logic is commented out, meaning overdrafts are not enforced by the system.",
+      "severity": "Critical",
+      "file": "OVD-DRIVER.cbl",
+      "line": "19"
+    },
+    {
+      "type": "Code Smell",
+      "description": "Legacy code comments obscure the original intent or decision-making process.",
+      "severity": "Minor",
+      "file": "OVD-DRIVER.cbl",
+      "line": "5"
+    },
+    {
+      "type": "Data Issue",
+      "description": "Transaction data CSV format is inferred, may not match expected COBOL record layout exactly without proper parsing.",
+      "severity": "Minor",
+      "file": "transactions.csv"
+    }
+  ]
+}

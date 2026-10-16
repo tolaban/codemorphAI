@@ -1,0 +1,70 @@
+{
+  "project_name": "NightmareBank_COBOL",
+  "test_cases": [
+    {
+      "name": "Normal Overdraft Charge",
+      "description": "Account balance goes negative, standard fee applies.",
+      "input": {
+        "transactions.csv": [
+          "1234567890,-50.00,C,500.00,Y"
+        ]
+      },
+      "expected_output": {
+        "OVD-DRIVER.cbl": "OVERDRAFT FEE CHARGED. NEW BAL: -85.00",
+        "analysis_log": "TOTAL RECORDS: 1"
+      }
+    },
+    {
+      "name": "Overdraft Charge with Y2K Surcharge",
+      "description": "Account balance goes negative, Y2K flag is N, extra surcharge applies.",
+      "input": {
+        "transactions.csv": [
+          "0987654321,-10.00,S,100.00,N"
+        ]
+      },
+      "expected_output": {
+        "OVD-DRIVER.cbl": "OVERDRAFT FEE CHARGED. NEW BAL: -40.00",
+        "analysis_log": "TOTAL RECORDS: 1"
+      }
+    },
+    {
+      "name": "No Overdraft",
+      "description": "Account balance is positive, no fee should be charged.",
+      "input": {
+        "transactions.csv": [
+          "1122334455,500.00,C,500.00,Y"
+        ]
+      },
+      "expected_output": {
+        "OVD-DRIVER.cbl": null,
+        "analysis_log": "TOTAL RECORDS: 1"
+      }
+    },
+    {
+      "name": "Unknown Account Type Overdraft",
+      "description": "Account balance negative, unknown type triggers higher fee.",
+      "input": {
+        "transactions.csv": [
+          "5544332211,-200.00,X,100.00,Y"
+        ]
+      },
+      "expected_output": {
+        "OVD-DRIVER.cbl": "OVERDRAFT FEE CHARGED. NEW BAL: -250.00",
+        "analysis_log": "TOTAL RECORDS: 1"
+      }
+    },
+    {
+      "name": "Ignored Overdraft Limit",
+      "description": "Balance extremely negative, but limit is ignored as per 'MIKE's fix.",
+      "input": {
+        "transactions.csv": [
+          "6677889900,-5000.00,C,500.00,Y"
+        ]
+      },
+      "expected_output": {
+        "OVD-DRIVER.cbl": "OVERDRAFT FEE CHARGED. NEW BAL: -5035.00",
+        "analysis_log": "TOTAL RECORDS: 1"
+      }
+    }
+  ]
+}

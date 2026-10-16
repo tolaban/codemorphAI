@@ -1,0 +1,76 @@
+{
+  "project_name": "RetailPOS_VB6",
+  "analysis_date": "2023-10-27",
+  "issues": [
+    {
+      "type": "Code Smell",
+      "description": "Use of global variables (g_dbConn, g_UserID) for state management.",
+      "severity": "Major",
+      "file": "modGlobalDB.bas",
+      "line": "5"
+    },
+    {
+      "type": "Security Vulnerability",
+      "description": "Hardcoded database credentials (username, password) in plain text.",
+      "severity": "Critical",
+      "file": "modGlobalDB.bas",
+      "line": "9"
+    },
+    {
+      "type": "Bug/Code Smell",
+      "description": "On Error Resume Next is used extensively, masking potential errors and making debugging difficult.",
+      "severity": "Major",
+      "file": "frmCheckout.frm",
+      "line": "17"
+    },
+    {
+      "type": "Code Smell",
+      "description": "UI (form) code is mixed with business logic and direct database access.",
+      "severity": "Major",
+      "file": "frmCheckout.frm",
+      "line": "26"
+    },
+    {
+      "type": "Technical Debt",
+      "description": "Hardcoded discount percentages (magic numbers) for tiers.",
+      "severity": "Major",
+      "file": "clsCustomerDiscount.cls",
+      "line": "16"
+    },
+    {
+      "type": "Bug",
+      "description": "Potential division by zero error if 'Years' is 0 and the simple check is bypassed or fails. The formula itself is simplistic.",
+      "severity": "Major",
+      "file": "clsCustomerDiscount.cls",
+      "line": "26"
+    },
+    {
+      "type": "Security Vulnerability",
+      "description": "SQL Injection risk: Database query is constructed via string concatenation with user-provided values.",
+      "severity": "Critical",
+      "file": "frmCheckout.frm",
+      "line": "44"
+    },
+    {
+      "type": "Bug",
+      "description": "No transaction management for database inserts. A failure after the first insert would leave data in an inconsistent state.",
+      "severity": "Major",
+      "file": "frmCheckout.frm",
+      "line": "44"
+    },
+    {
+      "type": "Code Smell",
+      "description": "Hardcoded bypass logic for a specific user ID ('JTIMMINS') for a 100% discount.",
+      "severity": "Minor",
+      "file": "clsCustomerDiscount.cls",
+      "line": "36"
+    },
+     {
+      "type": "Robustness Issue",
+      "description": "If g_UserID is not explicitly set, the nepotism discount will not trigger, which might be unintended behaviour.",
+      "severity": "Minor",
+      "file": "clsCustomerDiscount.cls",
+      "line": "36"
+    }
+  ]
+}
